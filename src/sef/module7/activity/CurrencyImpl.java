@@ -3,23 +3,23 @@ package sef.module7.activity;
 import java.util.Calendar;
 
 /**
- * Represents an implementation of the Currency interface.  The equality test for
- * this currency implementation requires that the value and the name of the denomination
- * must be true in order to be considered equal.
+ * Represents an implementation of the Currency interface. The equality test for
+ * this currency implementation requires that the value and the name of the
+ * denomination must be true in order to be considered equal.
  * 
  * @author John Doe
  *
  */
 public class CurrencyImpl implements Currency {
-	
+
 	private float value;
 	private Denomination denomination;
 
 	/**
-	 * Creates an instance of the of the Currency class with the specified
-	 * value and denomination
+	 * Creates an instance of the of the Currency class with the specified value and
+	 * denomination
 	 * 
-	 * @param value the value of the currency 
+	 * @param value        the value of the currency
 	 * @param denomination the denomination of the currency
 	 */
 	public CurrencyImpl(float value, Denomination denomination) {
@@ -27,21 +27,27 @@ public class CurrencyImpl implements Currency {
 		this.denomination = denomination;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sef.module6.activity.Currency#getValue()
 	 */
 	public float getValue() {
 		return this.value;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sef.module6.activity.Currency#getDenomination()
 	 */
 	public Denomination getDenomination() {
 		return this.denomination;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sef.module6.activity.Currency#getCreateDate()
 	 */
 	public Calendar getCreateDate() {
@@ -49,24 +55,36 @@ public class CurrencyImpl implements Currency {
 		return rn;
 	}
 
-	/* (non-Javadoc)
+	public void setValue(float value) {
+		this.value = value;
+	}
+
+	public void setDenomination(Denomination denomination) {
+		this.denomination = denomination;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
 		return this.toString();
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object o) {
-		Currency c = (Currency) o;
-		if (c.getValue() == getValue() && c.getDenomination().getDescription() == getDenomination().getDescription() 
-				&& c.getDenomination().getName() == getDenomination().getName() 
-				&& c.getDenomination().getSymbol() == getDenomination().getSymbol()) {
-			return true;
+		if (o instanceof Currency) {
+			Currency c = (Currency) o;
+			if (c.getValue() == this.getValue() && c.getDenomination() == this.getDenomination()) {
+				return true;
+			}
 		}
+
 		return false;
 	}
 

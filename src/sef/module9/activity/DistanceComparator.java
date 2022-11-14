@@ -19,6 +19,6 @@ public class DistanceComparator implements Comparator<RadarContact>{
 	 */
 	public int compare(RadarContact c1, RadarContact c2) {
 		
-		return 1;
+		return Double.compare(c1.getDistance(), c2.getDistance());
 	}
 }

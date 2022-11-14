@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -28,14 +29,25 @@ public class RadarImpl implements Radar{
 	 * @see sef.module8.activity.Radar#addContact(sef.module8.activity.RadarContact)
 	 */
 	public RadarContact addContact(RadarContact contact) {
-	    for (RadarContact radarContact : radarList) {
-            if(radarContact.getContactID() == radarContact.getContactID()) {
-                radarContact.setContactID(radarContact.getContactID());
-                return radarContact;
+//		   RadarContact tempContact = contact;
+		   boolean isSame = false;
+		   if(contact == null) {
+		       return contact;
+		   }
+		   
+	    for (int i = 0; i < getContactCount(); i++) {
+            if(radarList.get(i).getContactID() == contact.getContactID()) {
+            	
+            	radarList.get(i).setBearing(contact.getBearing());
+            	radarList.get(i).setDistance(contact.getDistance());
+            	isSame = true;
             }
         }
 	    
-	    radarList.add(contact);
+	    if(!isSame) {
+	    	radarList.add(contact);
+	    }
+	    
 		return contact;
 	}
 
@@ -64,8 +76,9 @@ public class RadarImpl implements Radar{
 	 */
 	public RadarContact removeContact(String id) {
 		for (RadarContact radarContact : radarList) {
-            if(radarContact.getContactID() == id) {
+            if(radarContact.getContactID().equals(id)) {
                 radarList.remove(radarList.indexOf(radarContact));
+                return radarContact;
             }
         }
 		return null;
@@ -75,15 +88,19 @@ public class RadarImpl implements Radar{
 	 * @see sef.module8.activity.Radar#returnContacts()
 	 */
 	public List<RadarContact> returnContacts() {
-		return radarList;
+		List<RadarContact> radarContact = new ArrayList<>();
+		radarContact.addAll(radarList);
+		return radarContact;
 	}
 
 	/* (non-Javadoc)
 	 * @see sef.module8.activity.Radar#returnContacts(java.util.Comparator)
 	 */
 	public List<RadarContact> returnContacts(Comparator<RadarContact> comparator) {
-
-		return null;
+		Collections.sort(radarList, comparator);
+	    List<RadarContact> sorted = new ArrayList<>();
+	    sorted.addAll(radarList);
+		return sorted;
 	}
 
 	
